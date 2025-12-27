@@ -22,11 +22,18 @@
     </head>
     <body class="font-sans antialiased">
 
-        <div class="min-h-screen">
+        <div class="min-h-screen flex flex-col">
+            
+            <!-- Header -->
+            <livewire:components.header />
+
             <!-- Page Content -->
-            <main>
+            <main class="flex-1">
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            <livewire:components.footer />
         </div>
 
         @stack('modals')
