@@ -45,18 +45,6 @@
         <!-- Right Side - Login Form -->
         <div class="w-full">
             <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12" x-data="{ showPassword: false, rememberMe: false }">
-                <!-- Logo -->
-                <div class="flex justify-center mb-8">
-                    <a href="/" class="flex items-center gap-2">
-                        <div class="bg-gradient-to-br from-orange-500 to-red-500 p-3 rounded-xl">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-2xl font-bold text-gray-800">FoodExpress</span>
-                    </a>
-                </div>
-
                 <!-- Header -->
                 <div class="text-center mb-8">
                     <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Sign In</h1>
@@ -92,10 +80,20 @@
                     </div>
                 @endif
 
-                <!-- Login Form -->
-                <form method="POST" action="{{ route('login') }}" class="space-y-6">
-                    @csrf
+                <!-- Error Messages -->
+                @if (session('error'))
+                    <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm text-red-700">{{ session('error') }}</span>
+                        </div>
+                    </div>
+                @endif
 
+                <!-- Login Form -->
+                <form wire:submit.prevent="login" class="space-y-6">
                     <!-- Email Field -->
                     <div>
                         <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -110,8 +108,7 @@
                             <input 
                                 id="email" 
                                 type="email" 
-                                name="email" 
-                                value="{{ old('email') }}" 
+                                wire:model="email"
                                 required 
                                 autofocus 
                                 autocomplete="username"
@@ -138,7 +135,7 @@
                             <input 
                                 id="password" 
                                 :type="showPassword ? 'text' : 'password'"
-                                name="password" 
+                                wire:model="password"
                                 required 
                                 autocomplete="current-password"
                                 class="block w-full pl-12 pr-12 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 @error('password') border-red-500 @enderror"
@@ -167,8 +164,7 @@
                         <label class="flex items-center cursor-pointer">
                             <input 
                                 type="checkbox" 
-                                name="remember"
-                                x-model="rememberMe"
+                                wire:model="remember"
                                 class="w-5 h-5 text-orange-500 border-gray-300 rounded focus:ring-orange-500 cursor-pointer"
                             >
                             <span class="ml-2 text-sm text-gray-700">Remember me</span>
@@ -184,6 +180,8 @@
                     <!-- Submit Button -->
                     <button 
                         type="submit"
+                        wire:loading.attr="disabled"
+                        wire:loading.class="opacity-50 cursor-not-allowed"
                         class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
                         Sign In
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

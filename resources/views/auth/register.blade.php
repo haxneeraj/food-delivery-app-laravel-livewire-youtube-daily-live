@@ -3,18 +3,7 @@
         <!-- Left Side - Form -->
         <div class="w-full order-2 lg:order-1">
             <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12" x-data="{ showPassword: false, showPasswordConfirmation: false, acceptTerms: false }">
-                <!-- Logo -->
-                <div class="flex justify-center mb-8">
-                    <a href="/" class="flex items-center gap-2">
-                        <div class="bg-gradient-to-br from-orange-500 to-red-500 p-3 rounded-xl">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-2xl font-bold text-gray-800">FoodExpress</span>
-                    </a>
-                </div>
-
+                     
                 <!-- Header -->
                 <div class="text-center mb-8">
                     <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Create Account</h1>
@@ -23,31 +12,59 @@
 
                 <!-- Registration Form -->
                 <form wire:submit.prevent="register" class="space-y-5">
-                    <!-- Name Field -->
-                    <div>
-                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
-                            Full Name
-                        </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- First Name Field -->
+                        <div class="">
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                                First Name
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <input 
+                                    id="first_name" 
+                                    type="text" 
+                                    wire:model="first_name"
+                                    required 
+                                    autofocus 
+                                    autocomplete="first_name"
+                                    class="block w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 @error('name') border-red-500 @enderror"
+                                    placeholder="John"
+                                >
                             </div>
-                            <input 
-                                id="name" 
-                                type="text" 
-                                wire:model="name"
-                                required 
-                                autofocus 
-                                autocomplete="name"
-                                class="block w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 @error('name') border-red-500 @enderror"
-                                placeholder="John Doe"
-                            >
+                            @error('first_name')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
-                        @error('name')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                         <!-- Last Name Field -->
+                        <div class="">
+                            <label for="last_name" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Last Name
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <input 
+                                    id="last_name" 
+                                    type="text" 
+                                    wire:model="last_name"
+                                    required 
+                                    autofocus 
+                                    autocomplete="last_name"
+                                    class="block w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 @error('name') border-red-500 @enderror"
+                                    placeholder="Doe"
+                                >
+                            </div>
+                            @error('last_name')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
                     <!-- Email Field -->
